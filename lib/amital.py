@@ -1,9 +1,11 @@
 import time
-import pyperclip3 as pc
+
 import keyboard
 import pyautogui
+import pyperclip as pc
 from pynput.mouse import Controller
-import clipboard as c
+
+# import clipboard as c
 import config
 from config import *
 
@@ -29,7 +31,7 @@ class Amital:
 
         time.sleep(2)
 
-    def focus_on_screen(self,click = True):
+    def focus_on_screen(self, click=True):
         if click:
             pyautogui.click(self.window_position)
         else:
@@ -64,7 +66,10 @@ class Amital:
         time.sleep(0.02)
         pyautogui.press('enter')
         time.sleep(0.02)
+
         pyautogui.write(moth)
+        pyautogui.write(".")
+        pyautogui.write("2021")
         pyautogui.press('enter')
         pyautogui.write("01")
         time.sleep(1)
@@ -77,9 +82,28 @@ class Amital:
     def close_journal_screen(self):
         self.focus_on_screen()
         time.sleep(0.02)
-        pyautogui.write("f1")
+        pyautogui.press("f1")
         self.console.print(f'✅ List load complete')
         time.sleep(0.5)
+
+    def fill_rows_in_journal_screen(self, rows):
+        text = ""
+        for row in rows:
+            row.pop(0)
+            self.focus_on_screen()
+            for value in row:
+                text += str(value) + "\r\n"
+            # blank fields
+            for _ in range(3):
+                text += "" + "\r\n"
+            # c.copy(text)
+        pc.copy(text)
+        pc.waitForPaste()
+        time.sleep(1)
+        self.focus_on_screen(False)
+        pyautogui.click(button='right')
+        time.sleep(0.025)
+        pyautogui.press('enter', presses=1, interval=0.25)
 
     def fill_row_in_journal_screen(self, row):
         row.pop(0)
@@ -90,11 +114,13 @@ class Amital:
         # blank fields
         for _ in range(3):
             text += "" + "\r\n"
-        c.copy(text)
+        self.console.print(f'☑{text}')
+        # c.copy(text)
+        pc.copy(text)
+        pc.waitForPaste()
         time.sleep(1)
         self.focus_on_screen(False)
         pyautogui.click(button='right')
         time.sleep(0.025)
         pyautogui.press('enter', presses=1, interval=0.25)
-        #pyautogui.press('right', presses=4, interval=0.25)
-
+        # pyautogui.press('right', presses=4, interval=0.25)
