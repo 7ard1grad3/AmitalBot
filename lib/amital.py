@@ -114,7 +114,6 @@ class Amital:
         # blank fields
         for _ in range(3):
             text += "" + "\r\n"
-        self.console.print(f'☑{text}')
         # c.copy(text)
         pc.copy(text)
         pc.waitForPaste()

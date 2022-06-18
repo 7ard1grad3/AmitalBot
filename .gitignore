@@ -1,2 +1,6 @@
 .idea
 !/excel/template/template.xlsx
+/build
+/excel/complete
+
+__pycache__/
