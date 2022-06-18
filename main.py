@@ -16,7 +16,7 @@ event = threading.Event()
 def stop():
     event.set()
     print("stop")
-    sys.exit()
+    quit()
 
 
 keyboard.add_hotkey(STOP_KEY, stop)
